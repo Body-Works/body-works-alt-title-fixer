@@ -2,6 +2,7 @@
 require __DIR__ . "/vendor/autoload.php";
 require __DIR__ . "/inc/helpers.php";
 require __DIR__ . "/inc/sql.php";
+require __DIR__ . "/inc/data.php";
 
 if (file_exists("./.env")) {
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -64,6 +65,6 @@ while ($row = $stmt->fetch())
     if (!empty($productThumb)) {
         
     } else {
-        nice_echo("There's no product thumb", "⛔");
+        nice_echo("There's no product thumb", "🎃");
     }
 } 
