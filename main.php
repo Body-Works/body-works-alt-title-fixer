@@ -44,7 +44,7 @@ while ($row = $stmt->fetch())
     $meta = $metaStmt->fetchAll();
 
     /** @var string $niceTitle */
-    $niceTitle = "{$row['post_title']} ({$row['model']})";
+    $niceTitle = "{$row['post_title']} {$row['model']}";
 
     /** @var string $niceAlt */
     $niceAlt = "Body Works siłownie plenerowe " . mb_strtolower($row['post_title']);
