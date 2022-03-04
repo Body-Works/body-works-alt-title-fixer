@@ -6,5 +6,7 @@
             "email": "contact@realhe.ro"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    }
 }
