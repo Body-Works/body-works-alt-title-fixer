@@ -43,6 +43,12 @@ while ($row = $stmt->fetch())
     $metaStmt->execute([$row["ID"]]);
     $meta = $metaStmt->fetchAll();
 
+    /** @var string $niceTitle */
+    $niceTitle = "{$row['post_title']} ({$row['model']})";
+
+    /** @var string $niceAlt */
+    $niceAlt = "Body Works siłownie plenerowe " . mb_strtolower($row['post_title']);
+
     /**
      * Product gallery
      */
@@ -52,6 +58,23 @@ while ($row = $stmt->fetch())
 
     if (!empty($productGallery)) {
         $productGallery = explode(",", $productGallery);
+
+        // Loop
+        foreach($productGallery as $id) {
+            $id = intval($id);
+
+            nice_echo("Setting title: '{$niceTitle}' for gallery thumb {$id}", "👌");
+            
+            if(!update_title($pdo, $id, $niceTitle)) {
+                nice_echo("Something went wrong!", "😔");
+            }
+    
+            nice_echo("Setting alt: '{$niceAlt}' for gallery thumb {$id}", "👌");
+            
+            if(!update_alt($pdo, $id, $niceAlt)) {
+                nice_echo("Something went wrong!", "😔");
+            }
+        }
     } else {
         nice_echo("There's no product gallery", "⛔");
     }
@@ -63,7 +86,17 @@ while ($row = $stmt->fetch())
     $productThumb = $meta[1]["meta_value"];
 
     if (!empty($productThumb)) {
-        
+        $thumbId = intval($productThumb);
+
+        nice_echo("Setting title: '{$niceTitle}' for thumb {$thumbId}", "👌");
+        if(!update_title($pdo, $thumbId, $niceTitle)) {
+            nice_echo("Something went wrong!", "😔");
+        }
+
+        nice_echo("Setting alt: '{$niceAlt}' for thumb {$thumbId}", "👌");
+        if(!update_alt($pdo, $thumbId, $niceAlt)) {
+            nice_echo("Something went wrong!", "😔");
+        }
     } else {
         nice_echo("There's no product thumb", "🎃");
     }
