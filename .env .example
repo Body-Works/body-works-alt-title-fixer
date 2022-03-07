@@ -1,0 +1,4 @@
+DB_NAME="body_works"
+DB_USER="root"
+DB_PASSWORD="toor"
+DB_HOST="172.25.0.2"
